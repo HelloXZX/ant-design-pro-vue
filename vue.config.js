@@ -23,5 +23,14 @@ module.exports = {
         javascriptEnabled: true
       }
     }
+  },
+  configureWebpack:{
+    resolve: {
+      extensions: ['*', '.js', '.vue'],
+      alias:{
+          'vue$': 'vue/dist/vue.common.js',
+          '@': path.resolve('src')
+      }
+    }
   }
 }

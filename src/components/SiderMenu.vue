@@ -24,9 +24,6 @@ export default {
     collapsed: Boolean,
     menuData: Array,
   },
-  mounted() {
-    console.log(this.menuData);
-  },
 }
 </script>
 

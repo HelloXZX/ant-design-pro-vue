@@ -17,9 +17,6 @@ export default {
     },
     copyright: String,
   },
-  mounted() {
-    console.log(this.links);
-  }
 }
 </script>
 

@@ -1,23 +1,23 @@
 <template>
-  <chart-card title="tesdfsdf" contentHeight="46" >
-    <template v-slot:total>
-      dfdfs
-    </template>
-    <template v-slot:action>
-      dfdfs
-    </template>
-    <template v-slot:footer>
-      dfdfs
-    </template>
-  </chart-card>
+<div>
+  <introduce-row />
+  <sales-card />
+</div>
+
 </template>
 
 <script>
-import ChartCard from '../../components/Charts/ChartCard';
+import IntroduceRow from './IntroduceRow'
+import SalesCard from './SalesCard'
+import numeral from 'numeral';
 export default {
   name: 'Analysis',
   components: {
-    ChartCard,
+    IntroduceRow,
+    SalesCard
+  },
+  methods: {
+    numeral,
   },
   
 }

@@ -33,9 +33,6 @@ export default {
       copyright: 'Copyright 2018 蚂蚁金服体验技术部出品'
     }
   },
-  mounted() {
-    console.log(this.links);
-  }
 }
 </script>
 

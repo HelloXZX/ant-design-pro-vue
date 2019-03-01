@@ -33,7 +33,6 @@ export default {
       )
     }
     const renderMenu = items => {
-      console.log(items);
       return items.map(item => {
         if (item.children) {
           return renderSubMenu(item)

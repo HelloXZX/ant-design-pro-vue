@@ -16,7 +16,7 @@
           </div>
         </div>
       </div>
-      <div class="content" style="{ height: contentHeight || 'auto' }">
+      <div class="content" :style="{ height: contentHeight + 'px' || 'auto' }">
         <div :class="{contentFixed: contentHeight}">
           <slot name="children"></slot>
         </div>
@@ -33,13 +33,9 @@
 <script>
 export default {
   name: 'ChartCard',
-  props: {
+  props:{
     title: String,
-    contentHeight: String,
-  },
-  mounted() {
-    console.log('dfdff')
-    console.log(this.$slots)
+    contentHeight: Number,
   },
 }
 </script>
