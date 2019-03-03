@@ -4,7 +4,6 @@
 
 <script>
 import G2 from '@antv/g2';
-import DataSet from '@antv/data-set'
 export default {
   name: 'MiniBar',
   props: {
@@ -17,7 +16,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.data);
     //this.initChart();
   },
   methods: {

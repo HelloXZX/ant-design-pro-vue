@@ -9,7 +9,8 @@ import {
   Row,
   Col,
   Tabs,
-  DatePicker
+  DatePicker,
+  Dropdown,
 } from 'ant-design-vue'
 import App from './App.vue'
 import router from './router'
@@ -33,6 +34,7 @@ Vue.component(Tabs.name, Tabs);
 Vue.component(Tabs.TabPane.name, Tabs.TabPane);
 Vue.component(DatePicker.name, DatePicker);
 Vue.component(DatePicker.RangePicker.name, DatePicker.RangePicker);
+Vue.component(Dropdown.name, Dropdown);
 
 Vue.config.productionTip = false
 

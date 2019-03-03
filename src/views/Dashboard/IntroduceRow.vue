@@ -14,7 +14,7 @@
           <trend flag="up" :style="{marginRight: '16px'}">
             周同比<span :style="{marginLeft: '8px'}">12%</span>
           </trend>
-          <trend flag="down" :style="{marginRight: '16px'}">
+          <trend flag="down" >
             日同比<span :style="{marginLeft: '8px'}">11%</span>
           </trend>
         </template>
@@ -35,7 +35,7 @@
           </a-tooltip>
         </template>
         <template v-slot:children>
-          <mini-area :data="visitData" />
+          <mini-area id="introduceMiniArea" color="#836FFF" :height="46" :data="visitData" />
         </template>
         <template v-slot:footer>
           <field label="日访问量" :value="`￥${numeral(12423).format('0,0')}`"></field>
@@ -79,7 +79,7 @@
           <trend flag="up" :style="{marginRight: '16px'}">
             周同比<span :style="{marginLeft: '8px'}">12%</span>
           </trend>
-          <trend flag="down" :style="{marginRight: '16px'}">
+          <trend flag="down" >
             日同比<span :style="{marginLeft: '8px'}">11%</span>
           </trend>
         </template>
@@ -92,11 +92,10 @@
 import ChartCard from '../../components/Charts/ChartCard';
 import Trend from '@/components/Trend';
 import Field from '@/components/Field';
-import MiniArea from '@/components/MiniArea';
-import MiniBar from '@/components/MiniBar';
-import MiniProgress from '@/components/MiniProgress';
+import MiniArea from '@/components/Charts/MiniArea';
+import MiniBar from '@/components/Charts/MiniBar';
+import MiniProgress from '@/components/Charts/MiniProgress';
 import numeral from 'numeral';
-import {fakeChartData} from '@/services/api';
 export default {
   name: "IntroduceRow",
   components: {
@@ -107,39 +106,11 @@ export default {
     MiniBar,
     MiniProgress
   },
-  data() {
-    return {
-      offlineChartData: [],
-      offlineData: [],
-      radarData: [],
-      salesData: [],
-      salesTypeData: [], 
-      salesTypeDataOffline: [],
-      salesTypeDataOnline: [],
-      searchData: [],
-      visitData: [],
-      visitData2: [],
-    }
+  props: {
+    visitData: Array,
   },
   methods: {
     numeral,
-    getData: async function () {
-      const result = await fakeChartData();
-      this.offlineChartData = result.offlineChartData;
-      this.offlineData = result.offlineData;
-      this.radarData = result.radarData;
-      this.salesData = result.salesData;
-      this.salesTypeData = result.salesTypeData; 
-      this.salesTypeDataOffline = result.salesTypeDataOffline;
-      this.salesTypeDataOnline = result.salesTypeDataOnline;
-      this.searchData = result.searchData;
-      this.visitData = result.visitData;
-      this.visitData2 = result.visitData2;
-      console.log(this.visitData);
-    },
-  },
-  mounted() {
-    this.getData();
   },
 }
 </script>

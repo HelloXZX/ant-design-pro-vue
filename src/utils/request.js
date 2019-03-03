@@ -54,8 +54,6 @@ export default function request(url, option) {
       // DELETE and 204 do not return data by default
       // using .json will report an error.
       if (option && option.method === 'DELETE' || response.status === 204) {
-        console.log("dsfsdf");
-
         return response.text();
       }
       return response.data;

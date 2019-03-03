@@ -15,7 +15,6 @@ export default {
   },
   mounted() {
     axios.get('/api/activities').then(function(res) {
-      console.log(res);
     })
   }
 }

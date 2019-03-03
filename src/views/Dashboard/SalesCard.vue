@@ -5,28 +5,79 @@
           <template v-slot:tabBarExtraContent>
             <div class="salesExtraWrap">
               <div class="salesExtra">
-                <a :class="{currentDate: selectDate==='today'}" @click="selectDate = 'today'">
+                <a :class="{currentDate: isActive('day')}" @click="selectDate('day')">
                   今日
                 </a>
-                <a :class="{currentDate: selectDate==='week'}" @click="selectDate = 'week'">
+                <a :class="{currentDate: isActive('week')}" @click="selectDate('week')">
                   本周
                 </a>
-                <a :class="{currentDate: selectDate==='month'}" @click="selectDate = 'month'">
+                <a :class="{currentDate: isActive('month')}" @click="selectDate('month')">
                   本月
                 </a>
-                <a :class="{currentDate: selectDate==='year'}" @click="selectDate = 'year'">
+                <a :class="{currentDate: isActive('year')}" @click="selectDate('year')">
                   本年
                 </a>
-                <a-range-picker />
               </div>
-
+              <a-range-picker :value="[startDate, endDate]" @change="calendarChange"/>
             </div>
           </template>
           <a-tab-pane tab="销售额" key="sales">
-
+            <a-row>
+              <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
+                <div class="salesBar">
+                  <bar id="mountNodebar1" :height="295" title="销售趋势" :data="salesData" />
+                </div>
+              </a-col>
+              <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
+                <div class="salesRank">
+                  <h4 class="rankingTitle">
+                    门店销售额排名
+                  </h4>
+                  <ul class="rankingList">
+                      <li v-for="(item, i) in rankingListData" :key="item.title">
+                        <span :class="{rankingItemNumber: true, active: i<3}">
+                          {{i + 1}}
+                        </span>
+                        <span class="rankingItemTitle" title={item.title}>
+                          {{item.title}}
+                        </span>
+                        <span class="rankingItemValue">
+                          {{numeral(item.total).format('0,0')}}
+                        </span>
+                      </li>
+                  </ul>
+                </div>
+              </a-col>
+            </a-row>
           </a-tab-pane>
           <a-tab-pane tab="访问量" key="views">
-
+            <a-row>
+              <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
+                <div class="salesBar">
+                  <bar id="mountNodebar2" :height="295" title="访问量趋势" :data="salesData" />
+                </div>
+              </a-col>
+              <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
+                <div class="salesRank">
+                  <h4 class="rankingTitle">
+                    门店销售额排名
+                  </h4>
+                  <ul class="rankingList">
+                      <li v-for="(item, i) in rankingListData" :key="item.title">
+                        <span :class="{rankingItemNumber: true, active: i<3}">
+                          {{i + 1}}
+                        </span>
+                        <span class="rankingItemTitle" title={item.title}>
+                          {{item.title}}
+                        </span>
+                        <span class="rankingItemValue">
+                          {{numeral(item.total).format('0,0')}}
+                        </span>
+                      </li>
+                  </ul>
+                </div>
+              </a-col>
+            </a-row>
           </a-tab-pane>
         </a-tabs>
       </div>
@@ -34,12 +85,56 @@
 </template>
 
 <script>
+import moment from 'moment';
+import Bar from '@/components/Charts/Bar';
+import numeral from 'numeral';
 export default {
   name: 'SalesCard',
+  components: {
+    Bar,
+  },
+  props: {
+    salesData: Array,
+  },
   data() {
     return {
-      selectDate: "today"
+      rankingListData: [],
+      startDate: moment().startOf('year'),
+      endDate: moment().endOf('year'),
     }
+  },
+  methods: {
+    numeral,
+    calendarChange: function (dates) {
+      this.startDate = dates[0];
+      this.endDate = dates[1];
+    },
+    selectDate: function (type) {
+      this.startDate = moment().startOf(type);
+      this.endDate = moment().endOf(type);
+    },
+    isActive: function name(type) {
+      let startDateStr = this.startDate.format('YYYY-MM-DD');
+      let endDateStr = this.endDate.format('YYYY-MM-DD');
+      if (moment().startOf(type).format('YYYY-MM-DD') === startDateStr 
+      && moment().endOf(type).format('YYYY-MM-DD') === endDateStr) {
+        return true;
+      }
+      return false;
+    },
+    initRankingData: function() {
+      let rankingListData = [];
+      for (let i = 0; i < 7; i += 1) {
+        rankingListData.push({
+          title: `珠江路 ${i} 号店`,
+          total: 323234,
+        });
+      }
+      this.rankingListData = rankingListData;
+    }
+  },
+  mounted() {
+    this.initRankingData()
   }
 }
 </script>
