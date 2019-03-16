@@ -20,7 +20,7 @@ export default [
     component: () => import(/* webpackChunkName: "UserLayout" */ "../layouts/BasicLayout.vue"),
     children: [
       // dashboard
-         { path: "/", redirect: "/dashboard/analysis" },
+      { path: "/", redirect: "/dashboard/analysis" },
       // {
       //   path: "/dashboard",
       //   name: "Dashboard",
@@ -28,64 +28,61 @@ export default [
           {
             path: "/dashboard/analysis",
             name: "分析页",
-            component: () => import(/* webpackChunkName: "UserLayout" */ "../views/Dashboard/Analysis.vue")
+            component: () => import(/* webpackChunkName: "Analysis" */ "../views/Dashboard/Analysis.vue")
           },
           {
             path: "/dashboard/monitor",
             name: "监控页",
-            component: () => import(/* webpackChunkName: "UserLayout" */ "../views/Dashboard/Monitor.vue")
+            component: () => import(/* webpackChunkName: "Monitor" */ "../views/Dashboard/Monitor.vue")
           },
           {
             path: "/dashboard/workplace",
             name: "工作台",
-            component: () => import(/* webpackChunkName: "UserLayout" */ "../views/Dashboard/Workplace.vue")
-          }
+            component: () => import(/* webpackChunkName: "Workplace" */ "../views/Dashboard/Workplace.vue")
+          },
       //   ]
       // },
-      // forms
+      //forms
       // {
       //   path: "/form",
-      //   icon: "form",
       //   name: "表单页",
-      //   routes: [
-      //     {
-      //       path: "/form/basic-form",
-      //       name: "基础表单",
-      //       component: "./Forms/BasicForm"
-      //     },
-      //     {
-      //       path: "/form/step-form",
-      //       name: "分步表单",
-      //       component: "./Forms/StepForm",
-      //       hideChildrenInMenu: true,
-      //       routes: [
-      //         {
-      //           path: "/form/step-form",
-      //           redirect: "/form/step-form/info"
-      //         },
-      //         {
-      //           path: "/form/step-form/info",
-      //           name: "分步表单（填写转账信息）",
-      //           component: "./Forms/StepForm/Step1"
-      //         },
-      //         {
-      //           path: "/form/step-form/confirm",
-      //           name: "分步表单（确认转账信息）",
-      //           component: "./Forms/StepForm/Step2"
-      //         },
-      //         {
-      //           path: "/form/step-form/result",
-      //           name: "分步表单（完成）",
-      //           component: "./Forms/StepForm/Step3"
-      //         }
-      //       ]
-      //     },
-      //     {
-      //       path: "/form/advanced-form",
-      //       name: "高级表单",
-      //       authority: ["admin"],
-      //       component: "./Forms/AdvancedForm"
-      //     }
+      //  children: [
+          {
+            path: "/form/basic-form",
+            name: "基础表单",
+            component: () => import(/* webpackChunkName: "BasicForm" */ "../views/Forms/BasicForm.vue")
+          },
+          {
+            path: "/form/step-form",
+            name: "分步表单",
+            component: () => import(/* webpackChunkName: "StepForm" */ "../views/Forms/StepForm/index.vue"),
+            children: [
+              {
+                path: "/form/step-form",
+                redirect: "/form/step-form/info"
+              },
+              {
+                path: "/form/step-form/info",
+                name: "分步表单（填写转账信息）",
+                component: () => import(/* webpackChunkName: "Step1" */ "../views/Forms/StepForm/Step1.vue"),
+              },
+              {
+                path: "/form/step-form/confirm",
+                name: "分步表单（确认转账信息）",
+                component: () => import(/* webpackChunkName: "Step2" */ "../views/Forms/StepForm/Step2.vue"),
+              },
+              {
+                path: "/form/step-form/result",
+                name: "分步表单（完成）",
+                component: () => import(/* webpackChunkName: "Step3" */ "../views/Forms/StepForm/Step3.vue"),
+              }
+            ]
+          },
+          {
+            path: "/form/advanced-form",
+            name: "高级表单",
+            component: () => import(/* webpackChunkName: "BasicForm" */ "../views/Forms/AdvancedForm.vue"),
+          }
       //   ]
       // },
       // // list

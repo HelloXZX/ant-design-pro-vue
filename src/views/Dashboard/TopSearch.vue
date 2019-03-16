@@ -57,18 +57,51 @@
         <mini-area :line="true" id="topSearchMiniArea2" :height="45" :data="visitData2" />
       </a-col>
     </a-row>
+    <a-table :data-source="searchData" size="small" :pagination="{pageSize: 5}" :style="{marginTop: '20px'}">
+      <a-table-column
+        title="排名"
+        dataIndex="index"
+        key="index"
+      />
+      <a-table-column
+        title="搜索关键词"
+        dataIndex="keyword"
+        key="keyword"
+      />
+      <a-table-column
+        title="用户数"
+        dataIndex="count"
+        key="count"
+        :sorter = "(a, b) => a.count - b.count"
+      />
+      <a-table-column
+        title="涨幅数"
+        dataIndex="range"
+        key="range"
+        align="right"
+        :sorter = "(a, b) => a.range - b.range"
+      >
+        <template slot-scope="range, record" >
+          <trend :flag="record.status === 1 ? 'down' : 'up'" >
+            <span :style="{marginLeft: '8px'}">{{range}}%</span>
+          </trend>
+        </template>
+      </a-table-column>
+    </a-table>
   </a-card>
 </template>
 
 <script>
 import NumberInfo from '@/components/NumberInfo'
 import MiniArea from '@/components/Charts/MiniArea'
+import Trend from '@/components/Trend'
 import numeral from 'numeral'
 export default {
   name: 'TopSearch',
   components: {
     NumberInfo,
-    MiniArea
+    MiniArea,
+    Trend,
   },
   props: {
     searchData: {

@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import VueResizeText from 'vue-resize-text'
+
 import {
   Button, 
   Layout, 
@@ -11,6 +13,16 @@ import {
   Tabs,
   DatePicker,
   Dropdown,
+  Table,
+  Pagination,
+  Divider,
+  Breadcrumb,
+  Form,
+  Input,
+  InputNumber,
+  Radio,
+  Select,
+  
 } from 'ant-design-vue'
 import App from './App.vue'
 import router from './router'
@@ -35,6 +47,21 @@ Vue.component(Tabs.TabPane.name, Tabs.TabPane);
 Vue.component(DatePicker.name, DatePicker);
 Vue.component(DatePicker.RangePicker.name, DatePicker.RangePicker);
 Vue.component(Dropdown.name, Dropdown);
+Vue.component(Table.name, Table);
+Vue.component(Table.Column.name, Table.Column);
+Vue.component(Pagination.name, Pagination);
+Vue.component(Divider.name, Divider);
+Vue.component(Breadcrumb.name, Breadcrumb);
+Vue.component(Breadcrumb.Item.name, Breadcrumb.Item);
+Vue.component(Form.name, Form);
+Vue.component(Form.Item.name, Form.Item);
+Vue.component(Input.name, Input);
+Vue.component(Input.TextArea.name, Input.TextArea);
+Vue.component(Radio.name, Radio);
+Vue.component(Radio.Group.name, Radio.Group);
+
+
+Vue.use(VueResizeText)
 
 Vue.config.productionTip = false
 

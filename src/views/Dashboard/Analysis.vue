@@ -2,7 +2,14 @@
 <div>
   <introduce-row :visitData="visitData"/>
   <sales-card :salesData="salesData" />
-  <top-search :visitData2="visitData2" :searchData="searchData"/>
+  <a-row :gutter="24">
+    <a-col :xl="12" :lg="24" :md="24" :sm="24" :xs="24">
+      <top-search :visitData2="visitData2" :searchData="searchData"/>
+    </a-col>
+    <a-col :xl="12" :lg="24" :md="24" :sm="24" :xs="24">
+      <proportion-sales :salesTypeData="salesTypeData" />
+    </a-col>
+  </a-row>
 </div>
 
 </template>
@@ -11,6 +18,7 @@
 import IntroduceRow from './IntroduceRow'
 import SalesCard from './SalesCard'
 import TopSearch from './TopSearch'
+import ProportionSales from './ProportionSales'
 import {fakeChartData} from '@/services/api';
 export default {
   name: 'Analysis',
@@ -18,6 +26,7 @@ export default {
     IntroduceRow,
     SalesCard,
     TopSearch,
+    ProportionSales,
   },
   data() {
     return {
