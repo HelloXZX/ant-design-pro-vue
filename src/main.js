@@ -22,7 +22,7 @@ import {
   InputNumber,
   Radio,
   Select,
-  
+  message,
 } from 'ant-design-vue'
 import App from './App.vue'
 import router from './router'
@@ -59,11 +59,16 @@ Vue.component(Input.name, Input);
 Vue.component(Input.TextArea.name, Input.TextArea);
 Vue.component(Radio.name, Radio);
 Vue.component(Radio.Group.name, Radio.Group);
+Vue.component(InputNumber.name, InputNumber);
+Vue.component(Select.name, Select);
+Vue.component(Select.Option.name, Select.Option);
 
 
 Vue.use(VueResizeText)
+Vue.use(message)
 
 Vue.config.productionTip = false
+Vue.prototype.$message = message
 
 new Vue({
   router,

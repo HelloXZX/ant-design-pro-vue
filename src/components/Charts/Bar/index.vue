@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4 v-show="title" style="{ marginBottom: 20 }">{{title}}</h4>
+    <h4 v-show="title" :style="{ marginBottom: '20'+'px' }">{{title}}</h4>
     <div :id="id" :style="{width: '100%'}"></div>
   </div>
 </template>

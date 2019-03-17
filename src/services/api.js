@@ -44,9 +44,13 @@ export async function updateRule(params = {}) {
 }
 
 export async function fakeSubmitForm(params) {
-  return request('/api/forms', {
-    method: 'POST',
-    data: params,
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(request('/api/forms', {
+        method: 'POST',
+        data: params,
+      }))
+    }, 2000)
   });
 }
 

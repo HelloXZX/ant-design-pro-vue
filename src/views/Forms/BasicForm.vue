@@ -9,7 +9,10 @@
     </page-header>
     <div :style="{ margin: '24px 0 0 0' }">
       <a-card>
-        <a-form>
+        <a-form
+          :form="form"
+          @submit="handleSubmit"
+        >
           <a-form-item
             :label-col="labelCol"
             :wrapper-col="wrapperCol"
@@ -67,6 +70,117 @@
               placeholder="请输入衡量标准"
             />
           </a-form-item>
+          <a-form-item
+            :label-col="labelCol"
+            :wrapper-col="wrapperCol"
+          >
+            <span slot="label">
+              客户
+              <em class="optional">
+                （选填）
+                <a-tooltip title="目标的服务对象">
+                  <a-icon type="info-circle-o" style="{ marginRight: 4 }" />
+                </a-tooltip>
+              </em>
+            </span>
+            <a-input
+              v-decorator="[
+                'client',
+              ]"
+              placeholder="请描述你服务的客户，内部客户直接 @姓名／工号"
+            />
+          </a-form-item>
+          <a-form-item
+            :label-col="labelCol"
+            :wrapper-col="wrapperCol"
+          >
+            <span slot="label">
+              邀评人
+              <em class="optional">
+                （选填）
+              </em>
+            </span>
+            <a-input
+              v-decorator="[
+                'invites',
+              ]"
+              placeholder="请直接 @姓名／工号，最多可邀请 5 人"
+            />
+          </a-form-item>
+          <a-form-item
+            :label-col="labelCol"
+            :wrapper-col="wrapperCol"
+          >
+            <span slot="label">
+              权重
+              <em class="optional">
+                （选填）
+              </em>
+            </span>
+            <a-input-number
+              v-decorator="[
+                'weight',
+              ]"
+              placeholder="请输入"
+              :min="0"
+              :max="100"
+            />
+            <span class="ant-form-text">%</span>
+          </a-form-item>
+          <a-form-item
+            :label-col="labelCol"
+            :wrapper-col="wrapperCol"
+            label="目标公开"
+            help="客户、邀评人默认被分享"
+          >
+            <a-radio-group
+              v-decorator="[
+                'public',
+                {initialValue: '1'}
+              ]"
+            >
+              <a-radio value="1">
+                公开
+              </a-radio>
+              <a-radio value="2">
+                部分公开
+              </a-radio>
+              <a-radio value="3">
+                不公开
+              </a-radio>
+            </a-radio-group>
+            <a-form-item
+              style="{ marginBottom: 0 }"
+              v-show="form.getFieldValue('public') === '2'"
+            >
+              <a-select>
+                <a-select-option value="1">
+                  同事A
+                </a-select-option>
+                <a-select-option value="2">
+                  同事B
+                </a-select-option>
+                <a-select-option value="3">
+                  同事C
+                </a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-form-item>
+          <a-form-item
+            :wrapper-col="submitWraperCol"
+          >
+            <a-button 
+              type="primary" 
+              :loading="submitting" 
+              :style="{marginTop: '32px'}"
+              html-type="submit"
+            >
+              提交
+            </a-button>
+            <a-button :style="{marginLeft: '8px'}">
+              保存
+            </a-button>
+          </a-form-item>
         </a-form>
       </a-card>
     </div>
@@ -75,6 +189,7 @@
 
 <script>
 import PageHeader from '../../components/PageHeader'
+import {fakeSubmitForm} from '@/services/api'
 export default {
   name: 'BasicForm',
   components: {
@@ -98,7 +213,27 @@ export default {
       submitWraperCol: {
         xs: { span: 24, offset: 0 },
         sm: { span: 10, offset: 7 },
-      }
+      },
+      form: this.$form.createForm(this),
+      submitting: false,
+    }
+  },
+  methods: {
+    handleSubmit(e) {
+      e.preventDefault();
+      this.form.validateFieldsAndScroll(async (err, values) => {
+        if(!err) {
+          console.log(values);
+          this.submitting = true;
+          const result = await fakeSubmitForm(values);
+          console.log(result.message);
+          if (result.message === 'Ok') {
+            this.submitting = false;
+            this.$message.success('提交成功');
+          }
+        }
+      })
+      
     }
   }
 }
