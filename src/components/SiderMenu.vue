@@ -27,7 +27,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 @import '~ant-design-vue/lib/style/themes/default.less';
 @nav-header-height: @layout-header-height;
 

@@ -48,6 +48,10 @@ export default [
       //   name: "表单页",
       //  children: [
           {
+            path: "/form",
+            redirect: "/form/basic-form",
+          },
+          {
             path: "/form/basic-form",
             name: "基础表单",
             component: () => import(/* webpackChunkName: "BasicForm" */ "../views/Forms/BasicForm.vue")
@@ -55,12 +59,10 @@ export default [
           {
             path: "/form/step-form",
             name: "分步表单",
+            redirect: "/form/step-form/info",
             component: () => import(/* webpackChunkName: "StepForm" */ "../views/Forms/StepForm/index.vue"),
             children: [
-              {
-                path: "/form/step-form",
-                redirect: "/form/step-form/info"
-              },
+
               {
                 path: "/form/step-form/info",
                 name: "分步表单（填写转账信息）",
@@ -82,7 +84,7 @@ export default [
             path: "/form/advanced-form",
             name: "高级表单",
             component: () => import(/* webpackChunkName: "BasicForm" */ "../views/Forms/AdvancedForm.vue"),
-          }
+          },
       //   ]
       // },
       // // list
@@ -91,47 +93,47 @@ export default [
       //   icon: "table",
       //   name: "列表页",
       //   routes: [
-      //     {
-      //       path: "/list/table-list",
-      //       name: "查询表格",
-      //       component: "./List/TableList"
-      //     },
-      //     {
-      //       path: "/list/basic-list",
-      //       name: "标准列表",
-      //       component: "./List/BasicList"
-      //     },
-      //     {
-      //       path: "/list/card-list",
-      //       name: "卡片列表",
-      //       component: "./List/CardList"
-      //     },
-      //     {
-      //       path: "/list/search",
-      //       name: "搜索列表",
-      //       component: "./List/List",
-      //       routes: [
-      //         {
-      //           path: "/list/search",
-      //           redirect: "/list/search/articles"
-      //         },
-      //         {
-      //           path: "/list/search/articles",
-      //           name: "搜索列表（文章）",
-      //           component: "./List/Articles"
-      //         },
-      //         {
-      //           path: "/list/search/projects",
-      //           name: "搜索列表（项目）",
-      //           component: "./List/Projects"
-      //         },
-      //         {
-      //           path: "/list/search/applications",
-      //           name: "搜索列表（应用）",
-      //           component: "./List/Applications"
-      //         }
-      //       ]
-      //     }
+          {
+            path: "/list/table-list",
+            name: "查询表格",
+            component: () => import(/* webpackChunkName: "TableList" */ "../views/List/TableList.vue")
+          },
+          {
+            path: "/list/basic-list",
+            name: "标准列表",
+            component: () => import(/* webpackChunkName: "BasicList" */ "../views/List/BasicList.vue")
+          },
+          {
+            path: "/list/card-list",
+            name: "卡片列表",
+            component: () => import(/* webpackChunkName: "CardList" */ "../views/List/CardList.vue")
+          },
+          {
+            path: "/list/search",
+            name: "搜索列表",
+            component: () => import(/* webpackChunkName: "List" */ "../views/List/List.vue"),
+            children: [
+              {
+                path: "/list/search",
+                redirect: "/list/search/articles"
+              },
+              {
+                path: "/list/search/articles",
+                name: "搜索列表（文章）",
+                component: () => import(/* webpackChunkName: "Articles" */ "../views/List/Articles.vue")
+              },
+              {
+                path: "/list/search/projects",
+                name: "搜索列表（项目）",
+                component: () => import(/* webpackChunkName: "Projects" */ "../views/List/Projects.vue")
+              },
+              {
+                path: "/list/search/applications",
+                name: "搜索列表（应用）",
+                component: () => import(/* webpackChunkName: "Applications" */ "../views/List/Applications.vue")
+              }
+            ]
+          }
       //   ]
       // },
       // {

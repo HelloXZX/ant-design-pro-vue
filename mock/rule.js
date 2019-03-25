@@ -1,4 +1,5 @@
-import { parse } from 'url';
+//import { parse } from 'url';
+const {parse} = require('url');
 
 // mock tableListDataSource
 let tableListDataSource = [];
@@ -125,7 +126,9 @@ function postRule(req, res, u, b) {
   return getRule(req, res, u);
 }
 
-export default {
+const mockData = {
   'GET /api/rule': getRule,
   'POST /api/rule': postRule,
-};
+}
+
+module.exports = mockData;

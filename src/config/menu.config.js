@@ -33,20 +33,20 @@ const mune = [
         path: "/form/step-form",
         name: "分步表单",
         hideChildrenInMenu: true,
-        children: [
-          {
-            path: "/form/step-form/info",
-            name: "分步表单（填写转账信息）",
-          },
-          {
-            path: "/form/step-form/confirm",
-            name: "分步表单（确认转账信息）",
-          },
-          {
-            path: "/form/step-form/result",
-            name: "分步表单（完成）",
-          }
-        ]
+        // children: [
+        //   {
+        //     path: "/form/step-form/info",
+        //     name: "分步表单（填写转账信息）",
+        //   },
+        //   {
+        //     path: "/form/step-form/confirm",
+        //     name: "分步表单（确认转账信息）",
+        //   },
+        //   {
+        //     path: "/form/step-form/result",
+        //     name: "分步表单（完成）",
+        //   }
+        // ]
       },
       {
         path: "/form/advanced-form",

@@ -6,7 +6,7 @@ const mockFileList = [
   path.resolve('./mock/geographic.js'),
   path.resolve('./mock/notices.js'),
   path.resolve('./mock/route.js'),
-  //path.resolve('./mock/rule.js'),
+  path.resolve('./mock/rule.js'),
   path.resolve('./mock/user.js'),
 ]
 
