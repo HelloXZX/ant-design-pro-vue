@@ -18,12 +18,19 @@
               <div v-show="$slots.content" class="content">
                 <slot name="content"></slot>
               </div>
-              <div v-show="$slots.content" class="extraContent">
+              <div v-show="$slots.extraContent" class="extraContent">
                 <slot name="extraContent"></slot>
               </div>
             </div>
           </div>
         </div>
+        <a-tabs 
+          v-show="tabList && tabList.length"
+          class="tabs"
+          @change="onChange"
+        >
+          <a-tab-pane v-for="(item,index) in tabList" :key="item.key" :tab="item.tab" />
+        </a-tabs>
         
         <!-- {tabList && tabList.length ? (
           <Tabs
@@ -60,11 +67,16 @@ export default {
   },
   components: {
     BreadCrumb,
-  }
+  },
+  methods: {
+    onChange: function(key) {
+      this.$emit('tabChange', key)
+    }
+  },
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 @import '~ant-design-vue/lib/style/themes/default.less';
 
 .pageHeader {

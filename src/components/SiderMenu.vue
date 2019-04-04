@@ -7,7 +7,7 @@
     width="265"
   >
     <div class="logo" />
-    <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['1']">
+    <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['1']" :openKeys="openKeys" @openChange="handleOpenChange">
       <TreeMenu :menuData="menuData" />
     </a-menu>
   </a-layout-sider>
@@ -16,6 +16,10 @@
 
 <script>
 import TreeMenu from './TreeMenu.vue';
+import menuData from '@/config/menu.config.js'
+
+const rootKey = menuData.map(item => item.path)
+
 export default {
   components: {
     TreeMenu
@@ -24,6 +28,22 @@ export default {
     collapsed: Boolean,
     menuData: Array,
   },
+  data() {
+    return {
+      rootKey: rootKey,
+      openKeys: [rootKey[0]]
+    }
+  },
+  methods: {
+    handleOpenChange: function(openKeys) {
+      const lastestOpenKey = openKeys.find(key => this.openKeys.indexOf(key) === -1)
+      if (this.rootKey.indexOf(lastestOpenKey) === -1) {
+        this.openKeys = openKeys;
+      } else {
+        this.openKeys = lastestOpenKey ? [lastestOpenKey] :  []
+      }
+    }
+  }
 }
 </script>
 

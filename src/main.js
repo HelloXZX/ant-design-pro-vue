@@ -29,6 +29,11 @@ import {
   Popconfirm,
   Popover,
   Badge,
+  Modal,
+  List,
+  Avatar,
+  Progress,
+  Tag,
 } from 'ant-design-vue'
 import App from './App.vue'
 import router from './router'
@@ -66,6 +71,7 @@ Vue.component(Input.Group.name, Input.Group);
 Vue.component(Input.TextArea.name, Input.TextArea);
 Vue.component(Radio.name, Radio);
 Vue.component(Radio.Group.name, Radio.Group);
+Vue.component(Radio.Button.name, Radio.Button);
 Vue.component(InputNumber.name, InputNumber);
 Vue.component(Select.name, Select);
 Vue.component(Select.Option.name, Select.Option);
@@ -77,6 +83,16 @@ Vue.component(Popconfirm.name, Popconfirm);
 Vue.component(Popover.name, Popover);
 Vue.component(Badge.name, Badge);
 Vue.component(Dropdown.name, Dropdown);
+Vue.component(Modal.name, Modal);
+Vue.component(Input.Search.name, Input.Search);
+Vue.component(List.name, List);
+Vue.component(List.Item.name, List.Item);
+Vue.component(List.Item.Meta.name, List.Item.Meta);
+Vue.component(Avatar.name, Avatar);
+Vue.component(Progress.name, Progress);
+Vue.component(Card.Meta.name, Card.Meta);
+Vue.component(Tag.name, Tag);
+Vue.component(Tag.CheckableTag.name, Tag.CheckableTag);
 
 Vue.use(VueResizeText)
 Vue.use(message)

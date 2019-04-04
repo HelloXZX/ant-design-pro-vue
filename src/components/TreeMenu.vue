@@ -36,7 +36,6 @@ export default {
       return items.map(item => {
         if (item.children) {
           return renderSubMenu(item)
-          //return renderParentMenu(item)
         } else {
           return renderParentMenu(item)
         }

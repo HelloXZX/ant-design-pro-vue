@@ -170,7 +170,7 @@
             </a-form>
           </div>
           <div class="tableListOperator">
-            <a-button icon="plus" type="primary" >
+            <a-button icon="plus" type="primary" @click="showNewModal = true" >
               新建
             </a-button>
             <span v-show="selectedRows.length > 0">
@@ -198,13 +198,45 @@
 
       </a-card>
     </div>
-
+    <a-modal
+      :visible="showNewModal"
+      title="新建规则"
+      destroyOnClose
+      @cancel="showNewModal = false"
+      @ok="handleAddRule"
+    >
+      <a-form
+        :form="addForm"        
+      >
+        <a-form-item
+          :label-col="{ span: 5 }"
+          :wrapper-col="{ span: 15 }"
+          label="描述"
+        >
+          <a-input
+            v-decorator="[
+              'desc',
+              {rules: [{ required: true, message: '请输入至少五个字符的规则描述！', min: 5 }]}
+            ]"
+            placeholder="请输入"
+          ></a-input>
+        </a-form-item>
+      </a-form>
+    </a-modal>
+    <update-rule-modal
+      :showUpdateModal="showUpdateModal"
+      :values="updateValues"
+      @cancel="showUpdateModal = false"
+      @submit="handleUpdate"
+      :key="updateValues.key"
+    />
   </div>
 </template>
 
 <script>
 import PageHeader from '../../components/PageHeader'
 import StandardTable from '../../components/StandardTable'
+import UpdateRuleModal from './UpdateRuleModal'
 import moment from 'moment'
 import {createNamespacedHelpers} from 'vuex'
 import { Badge } from 'ant-design-vue'
@@ -221,7 +253,8 @@ export default {
   name: 'TabelList',
   components: {
     PageHeader,
-    StandardTable
+    StandardTable,
+    UpdateRuleModal
   },
   data() {
     return {
@@ -294,6 +327,11 @@ export default {
       selectedRows: [],
       isCollapse: true, // 是否折叠
       form: this.$form.createForm(this),
+      addForm: this.$form.createForm(this),
+      showNewModal: false,
+      showUpdateModal: false,
+      updateValues: {},
+      formValues: {},
     }
   },
   computed: {
@@ -345,8 +383,35 @@ export default {
           ...fieldsValue,
           updatedAt: fieldsValue.updatedAt && fieldsValue.updatedAt.valueOf(),
         };
+        this.formValues = values;
         this.$store.dispatch('rule/fetch', values);
       });
+    },
+    handleAddRule() {
+      this.addForm.validateFields((err, fieldsValue) => {
+        if (err) return;
+        this.addForm.resetFields();
+        this.$store.dispatch('rule/add', fieldsValue).then(() => {
+          this.showNewModal = false;
+        });
+      })
+    },
+    handleUpdateModalVisible(visible, record) {
+      this.showUpdateModal = visible;
+      this.updateValues = record;
+    },
+    handleUpdate(fields) {
+      console.log(fields);
+      this.$store.dispatch('rule/update', {
+        query: this.formValues,
+        body: {
+          name: fields.name,
+          desc: fields.desc,
+          key: fields.key,
+        }
+      }).then(() => {
+        this.showUpdateModal = false;
+      })
     }
   },
   mounted() {
@@ -358,6 +423,7 @@ export default {
 <style lang="less" scoped>
 @import '~ant-design-vue/lib/style/themes/default.less';
 @import '~@/utils/utils.less';
+
 .tableList {
   .tableListOperator {
     margin-bottom: 16px;

@@ -1,10 +1,10 @@
 <template>
-  <div>查询列表</div>
+  <div>应用</div>
 </template>
 
 <script>
 export default {
-  name: 'TabelList',
+  name: 'Applications',
 }
 </script>
 

@@ -1,10 +1,10 @@
 <template>
-  <div>查询列表</div>
+  <div>项目</div>
 </template>
 
 <script>
 export default {
-  name: 'TabelList',
+  name: 'Projects',
 }
 </script>
 

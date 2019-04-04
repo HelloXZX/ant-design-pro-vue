@@ -25,6 +25,7 @@ export default {
       commit('updateLoading', true);
       const result = await addRule(payload);
       commit('save', result);
+      message.success('添加成功');
       commit('updateLoading', false);
     },
     async remove({state, commit, dispatch}, payload) {
@@ -38,6 +39,7 @@ export default {
       const result = await updateRule(payload);
       commit('save', result);
       commit('updateLoading', false);
+      message.success('配置成功');
     },
   },
 

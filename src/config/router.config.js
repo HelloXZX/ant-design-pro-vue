@@ -93,6 +93,7 @@ export default [
       //   icon: "table",
       //   name: "列表页",
       //   routes: [
+          { path: "/list", redirect: "/list/table-list" },
           {
             path: "/list/table-list",
             name: "查询表格",
