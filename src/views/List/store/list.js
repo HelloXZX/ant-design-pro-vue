@@ -44,7 +44,10 @@ export default {
   mutations: {
     queryList(state, payload) {
       state.list = payload;
-    }
+    },
+    appendList(state, payload) {
+      state.list = state.list.concat(payload);
+    },
   }
 
 }

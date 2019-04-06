@@ -81,24 +81,76 @@
       </a-form>
     </a-card>
     <a-card
-      :style="{ marginTop: 24 }"
+      :style="{ marginTop: '24px' }"
       :bordered="false"
       :bodyStyle="{ padding: '8px 32px 32px 32px' }"
-    ></a-card>
+    >
+      <a-list
+        rowKey="id"
+        :dataSource="list"
+        itemLayout="vertical"
+      >
+        <a-list-item slot="renderItem" slot-scope="item, index">
+          <icon-text type="star-o" :text="item.star"  slot="actions" />
+          <icon-text type="like-o" :text="item.like"  slot="actions" />
+          <icon-text type="message" :text="item.message"  slot="actions" />
+          <a-list-item-meta>
+            <a slot="title" class="listItemMetaTitle" :href="item.href">
+              {{item.title}}
+            </a>
+            <span slot="description">
+              <a-tag>Ant Design</a-tag>
+              <a-tag>设计语言</a-tag>
+              <a-tag>蚂蚁金服</a-tag>
+            </span>
+          </a-list-item-meta>
+          <article-list-content :data="item" />
+        </a-list-item>
+        <div v-show="list.length > 0" :style="{ textAlign: 'center', marginTop: '16px' }">
+          <a-button @click="fetchMore" :style="{ paddingLeft: '48px', paddingRight: '48px' }">
+            <span v-if="loading">
+              <Icon type="loading" /> 加载中...
+            </span>
+            <span v-else>加载更多</span>
+          </a-button>
+        </div>
+      </a-list>
+    </a-card>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
 import {createNamespacedHelpers} from 'vuex'
 import StandardFormRow from '@/components/StandardFormRow'
+import ArticleListContent from '@/components/ArticleListContent'
 import TagSelect from '@/components/TagSelect'
 const {mapState} = createNamespacedHelpers('list')
+
+const IconText = Vue.component('icon-text', {
+  functional: true,
+  props: {
+    type: String,
+    text: String|Number,
+  },
+  render(h, context) {
+    const {props: {type, text}} = context;
+    return (
+      <span>
+        <a-icon type={type} style={{ marginRight: '8px' }} />
+        {text}
+      </span>
+    )
+  }
+})
 
 export default {
   name: 'Articles',
   components: {
     StandardFormRow,
-    TagSelect
+    TagSelect,
+    ArticleListContent,
+    IconText
   },
   data() {
     return {
@@ -188,6 +240,9 @@ export default {
       this.form.setFieldsValue({
         owner: ['xzx'],
       });
+    },
+    fetchMore() {
+      this.$store.dispatch('list/appendFetch', {count: 5})
     }
   }
 }

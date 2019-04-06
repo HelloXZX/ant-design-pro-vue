@@ -4,6 +4,7 @@
       :breadcrumbList="breadcrumbList"
       :style="{ margin: '-20px -24px 0' }"
       :tabList="tabList"
+      :tabActiveKey="getTabActiveKey()"
       title="搜索列表"
       @tabChange="tabChange"
     >
@@ -54,6 +55,9 @@ export default {
   methods: {
     tabChange(key) {
       this.$router.push('/list/search/' + key)
+    },
+    getTabActiveKey() {
+      return window.location.pathname.split('/').pop()
     }
   }
 }

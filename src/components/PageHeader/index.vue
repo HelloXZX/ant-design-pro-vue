@@ -28,6 +28,7 @@
           v-show="tabList && tabList.length"
           class="tabs"
           @change="onChange"
+          :activeKey="tabActiveKey"
         >
           <a-tab-pane v-for="(item,index) in tabList" :key="item.key" :tab="item.tab" />
         </a-tabs>
@@ -64,6 +65,7 @@ export default {
     tabBarExtraContent: String,
     wide: Boolean,
     hiddenBreadcrumb: Boolean,
+
   },
   components: {
     BreadCrumb,

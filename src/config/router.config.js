@@ -134,7 +134,7 @@ export default [
                 component: () => import(/* webpackChunkName: "Applications" */ "../views/List/Applications.vue")
               }
             ]
-          }
+          },
       //   ]
       // },
       // {
@@ -143,23 +143,17 @@ export default [
       //   icon: "profile",
       //   routes: [
       //     // profile
-      //     {
-      //       path: "/profile/basic",
-      //       name: "基础详情页",
-      //       component: "./Profile/BasicProfile"
-      //     },
-      //     {
-      //       path: "/profile/basic/:id",
-      //       name: "基础详情页",
-      //       hideInMenu: true,
-      //       component: "./Profile/BasicProfile"
-      //     },
-      //     {
-      //       path: "/profile/advanced",
-      //       name: "高级详情页",
-      //       authority: ["admin"],
-      //       component: "./Profile/AdvancedProfile"
-      //     }
+          { path: "/profile", redirect: "/profile/basic" },
+          {
+            path: "/profile/basic",
+            name: "基础详情页",
+            component: () => import(/* webpackChunkName: "BasicProfile" */ "../views/Profile/BasicProfile.vue")
+          },
+          {
+            path: "/profile/advanced",
+            name: "高级详情页",
+            component: () => import(/* webpackChunkName: "AdvancedProfile" */ "../views/Profile/AdvancedProfile.vue")
+          }
       //   ]
       // },
       // {

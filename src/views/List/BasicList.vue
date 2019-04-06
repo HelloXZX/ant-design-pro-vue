@@ -105,7 +105,6 @@ const Info = Vue.component('info', {
     bordered: Boolean,
   },
   render(h, context) {
-    console.log(context);
     return (
       <div class="headerInfo">
         <span>{context.props.title}</span>
