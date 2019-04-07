@@ -8,6 +8,7 @@ const mockFileList = [
   path.resolve('./mock/route.js'),
   path.resolve('./mock/rule.js'),
   path.resolve('./mock/user.js'),
+  path.resolve('./mock/profile.js'),
 ]
 
 module.exports = {

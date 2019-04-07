@@ -143,7 +143,6 @@ export default [
       //   icon: "profile",
       //   routes: [
       //     // profile
-          { path: "/profile", redirect: "/profile/basic" },
           {
             path: "/profile/basic",
             name: "基础详情页",
@@ -153,7 +152,7 @@ export default [
             path: "/profile/advanced",
             name: "高级详情页",
             component: () => import(/* webpackChunkName: "AdvancedProfile" */ "../views/Profile/AdvancedProfile.vue")
-          }
+          },
       //   ]
       // },
       // {
@@ -162,12 +161,16 @@ export default [
       //   path: "/result",
       //   routes: [
       //     // result
-      //     {
-      //       path: "/result/success",
-      //       name: "成功页",
-      //       component: "./Result/Success"
-      //     },
-      //     { path: "/result/fail", name: "失败页", component: "./Result/Error" }
+          { path: "/result", redirect: "/result/success" },
+          {
+            path: "/result/success",
+            name: "成功页",
+            component: () => import(/* webpackChunkName: "Success" */ "../views/Result/Success.vue")
+          },
+          { path: "/result/fail", 
+            name: "失败页", 
+            component: () => import(/* webpackChunkName: "Error" */ "../views/Result/Error.vue")
+          },
       //   ]
       // },
       // {
@@ -176,27 +179,27 @@ export default [
       //   path: "/exception",
       //   routes: [
       //     // exception
-      //     {
-      //       path: "/exception/403",
-      //       name: "403",
-      //       component: "./Exception/403"
-      //     },
-      //     {
-      //       path: "/exception/404",
-      //       name: "404",
-      //       component: "./Exception/404"
-      //     },
-      //     {
-      //       path: "/exception/500",
-      //       name: "500",
-      //       component: "./Exception/500"
-      //     },
-      //     {
-      //       path: "/exception/trigger",
-      //       name: "触发错误",
-      //       hideInMenu: true,
-      //       component: "./Exception/TriggerException"
-      //     }
+          {
+            path: "/exception/403",
+            name: "403",
+            component: () => import(/* webpackChunkName: "Success" */ "../views/Exception/403.vue")
+          },
+          {
+            path: "/exception/404",
+            name: "404",
+            component: () => import(/* webpackChunkName: "Success" */ "../views/Exception/404.vue")
+          },
+          {
+            path: "/exception/500",
+            name: "500",
+            component: () => import(/* webpackChunkName: "Success" */ "../views/Exception/500.vue")
+          },
+          // {
+          //   path: "/exception/trigger",
+          //   name: "触发错误",
+          //   hideInMenu: true,
+          //   component: "./Exception/TriggerException"
+          // }
       //   ]
       // },
       // {

@@ -40,6 +40,7 @@ import router from './router'
 import store from './store'
 
 Vue.component(Button.name, Button);
+Vue.component(Button.Group.name, Button.Group);
 Vue.component(Layout.name, Layout);
 Vue.component(Layout.Sider.name, Layout.Sider);
 Vue.component(Layout.Header.name, Layout.Header);

@@ -33,7 +33,7 @@ export default {
       )
     }
     const renderMenu = items => {
-      return items.map(item => {
+      return items.filter(item => !item.hideInMenu).map(item => {
         if (item.children) {
           return renderSubMenu(item)
         } else {
