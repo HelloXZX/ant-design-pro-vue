@@ -1,13 +1,9 @@
 <template>
   <a-layout id="components-layout-demo-custom-trigger">
-    <sider-menu :collapsed='collapsed' :menuData='menuData' />
+    <sider-menu :collapsed='collapsed' :menuData='menuData' :logo="logo" title="Ant Design Pro Vue" />
     <a-layout style="min-height: 100vh">
-      <a-layout-header style="background: #fff; padding: 0">
-        <a-icon
-          class="trigger"
-          :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-          @click="()=> collapsed = !collapsed"
-        />
+      <a-layout-header :style="{background: '#fff', padding: 0}">
+        <global-header :collapsed="collapsed" @collapse="collapsed = !collapsed" />
       </a-layout-header>
       <a-layout-content :style="{ margin: '24px 16px', minHeight: '280px' }">
         <router-view />
@@ -19,16 +15,20 @@
 <script>
 import BasicFooter from './BasicFooter.vue'
 import SiderMenu from '../components/SiderMenu.vue'
+import GlobalHeader from '@/components/GlobalHeader'
 import menuData from '../config/menu.config.js'
+import logo from '../assets/logo.png'
 export default {
   components: {
     BasicFooter,
-    SiderMenu
+    SiderMenu,
+    GlobalHeader
   },
   data(){
     return {
       collapsed: false,
       menuData: menuData,
+      logo,
     }
   },
 }

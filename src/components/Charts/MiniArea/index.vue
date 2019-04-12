@@ -57,7 +57,7 @@ export default {
           padding: [5, 0, 0, 0],
         });
       }
-
+      this.chart.animate(null);
       this.chart.source(dv);
       this.chart.axis('x', {
         title: null,

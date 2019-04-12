@@ -92,6 +92,7 @@ Vue.component(List.Item.Meta.name, List.Item.Meta);
 Vue.component(Avatar.name, Avatar);
 Vue.component(Progress.name, Progress);
 Vue.component(Card.Meta.name, Card.Meta);
+Vue.component(Card.Grid.name, Card.Grid);
 Vue.component(Tag.name, Tag);
 Vue.component(Tag.CheckableTag.name, Tag.CheckableTag);
 

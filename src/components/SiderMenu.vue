@@ -6,8 +6,13 @@
     class="sider"
     width="265"
   >
-    <div class="logo" />
-    <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['1']" :openKeys="openKeys" @openChange="handleOpenChange">
+    <div class="logo">
+      <router-link to="/">
+        <img :src="logo" alt="logo" />
+        <h1>{{title}}</h1>
+      </router-link>
+    </div>
+    <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['/dashboard/analysis']" :selectedKeys="['/dashboard/analysis']" :openKeys="openKeys" @openChange="handleOpenChange">
       <TreeMenu :menuData="menuData" />
     </a-menu>
   </a-layout-sider>
@@ -27,6 +32,8 @@ export default {
   props: {
     collapsed: Boolean,
     menuData: Array,
+    logo: String,
+    title: String,
   },
   data() {
     return {

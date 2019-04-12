@@ -3,7 +3,7 @@
     <div class="chart" >
       <div vue-resize-text :id="id" :style="{width: '100%'}"></div>
     </div>
-    <ul class="legend">
+    <ul v-show="hasLegend" class="legend">
       <li v-for="(item, i) in legendData" :key="item.x" @click="handleLegendClick(item, i)">
         <span
           class="dot"
@@ -28,10 +28,7 @@ export default {
   name: 'Pie',
   props: {
     color: String,
-    data: {
-      type: Array,
-      default: [],
-    },
+    data: Array,
     height: Number,
     title: String,
     id: String,
@@ -42,7 +39,9 @@ export default {
     hasLegend: {
       type: Boolean,
       default: false,
-    }
+    },
+    percent: Number,
+    subTitle: String,
   },
   data() {
     return {
@@ -52,7 +51,6 @@ export default {
   },
   watch: {
     data: function() {
-      console.log(this.data);
       this.initChart();
     },
     legendData: function() {
@@ -60,10 +58,21 @@ export default {
     }
   },
   mounted() {
+    if (this.percent) {
+      this.data = [
+        {
+          x: '占比',
+          y: parseFloat(this.percent),
+        },
+        {
+          x: '反比',
+          y: 100 - parseFloat(this.percent),
+        },
+      ]
+    }
     setTimeout(() => {
       this.initChart()
     }, 0)
-    console.log(this.data);
   },
   methods: {
     numeral,
@@ -77,7 +86,6 @@ export default {
           animate: false
         });
       }
-
       var dv = new DataSet.View().source(this.data);
       dv.transform({
         type: 'percent',
@@ -87,27 +95,36 @@ export default {
       });
       this.chart.source(dv);
       this.chart.coord('theta', {
-        radius: 0.75,
-        innerRadius: 0.6
+        radius: 0.8,
+        innerRadius: 0.7
       });
       this.chart.tooltip({
         showTitle: false,
         itemTpl: '<li><span style="background-color:{color};" class="g2-tooltip-marker"></span>{name}: {value}</li>'
       });
       // 辅助文本
-      this.chart.guide().html({
-        position: ['50%', '50%'],
-        html: '<div style="color:#8c8c8c;font-size: 14px;text-align: center;width: 10em;">销售额<br><span style="color:#8c8c8c;font-size:20px">200</span>台</div>',
-        alignX: 'middle',
-        alignY: 'middle'
-      });
+      if (this.percent) {
+        this.chart.guide().html({
+          position: ['50%', '50%'],
+          html: '<div style="color:#8c8c8c;font-size: 14px;text-align: center;width: 10em;">' + this.subTitle + '<br><span style="color:#8c8c8c;font-size:20px">' + this.percent + '%' +'</span></div>',
+          alignX: 'middle',
+          alignY: 'middle'
+        });
+      } else {
+        this.chart.guide().html({
+          position: ['50%', '50%'],
+          html: '<div style="color:#8c8c8c;font-size: 14px;text-align: center;width: 10em;">销售额<br><span style="color:#8c8c8c;font-size:20px">¥ 15,781</span></div>',
+          alignX: 'middle',
+          alignY: 'middle'
+        });
+      }
+
       var interval = this.chart.intervalStack().position('percent').color('x').style({
         lineWidth: 1,
         stroke: '#fff'
       });
       this.chart.render();
       interval.setSelected(dv.origin[0]);
-      console.log(dv);
       let items = interval.get('dataArray');
       let legendData = items.map(item => {
         /* eslint no-underscore-dangle:0 */
