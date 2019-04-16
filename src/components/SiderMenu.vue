@@ -12,7 +12,7 @@
         <h1>{{title}}</h1>
       </router-link>
     </div>
-    <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['/dashboard/analysis']" :selectedKeys="['/dashboard/analysis']" :openKeys="openKeys" @openChange="handleOpenChange">
+    <a-menu theme="dark" mode="inline" :defaultSelectedKeys="defaultSelectedKeys" :openKeys="openKeys" @openChange="handleOpenChange">
       <TreeMenu :menuData="menuData" />
     </a-menu>
   </a-layout-sider>
@@ -37,8 +37,9 @@ export default {
   },
   data() {
     return {
-      rootKey: rootKey,
-      openKeys: [rootKey[0]]
+      rootKey: [],
+      openKeys: [],
+      defaultSelectedKeys: [],
     }
   },
   methods: {
@@ -49,7 +50,29 @@ export default {
       } else {
         this.openKeys = lastestOpenKey ? [lastestOpenKey] :  []
       }
+    },
+    getRootKeys(menuData) {
+      menuData.forEach(item => {
+        if (item.children) {
+          this.getRootKeys(item.children);
+          this.rootKey.push(item.path);
+        }
+      });
     }
+  },
+  beforeMount() {
+    this.defaultSelectedKeys = [this.$route.path];
+    this.getRootKeys(menuData);
+    this.openKeys = [];
+    this.rootKey.forEach(item => {
+      if(this.$route.path.indexOf(item) > -1) {
+        this.openKeys.push(item);
+      }
+    });
+    //this.openKeys = [this.$route.path];
+  },
+  mounted() {
+    console.log(this.rootKey);
   }
 }
 </script>

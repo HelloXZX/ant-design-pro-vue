@@ -106,7 +106,6 @@ export default {
     triggerSubmit() {
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log('hhhhh')
           this.$store.dispatch('form/submitStepForm', {...this.step, ...values});
         }
       })

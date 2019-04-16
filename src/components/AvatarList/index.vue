@@ -12,9 +12,9 @@
         :key="item.src"
       >
         <a-tooltip v-if="item.tips"  :title="item.tips">
-          <a-avatar :src="item.src" :size="size" :style="{ cursor: 'pointer' }" />
+          <a-avatar :src="item.src"  :style="{ cursor: 'pointer' }" />
         </a-tooltip>
-        <a-avatar v-else :src="item.src" :size="size" />
+        <a-avatar v-else :src="item.src"  />
       </li>
       <li 
         v-show="numToShow < numOfChildren"
@@ -26,7 +26,7 @@
           avatarItemMini: size === 'mini'
         }"
       >
-        <a-avatar :size="size">{{`+${numOfChildren - maxLength}`}}</a-avatar>
+        <a-avatar >{{`+${numOfChildren - maxLength}`}}</a-avatar>
       </li>
     </ul>
   </div>

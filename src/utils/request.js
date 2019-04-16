@@ -2,6 +2,8 @@ import axios from 'axios';
 import { notification } from 'ant-design-vue';
 import router from '../router';
 
+const prefix = 'http://106.12.91.101:8009';
+
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -45,7 +47,7 @@ const checkStatus = response => {
  */
 export default function request(url, option) {
   return axios({
-    url: url,
+    url: prefix + url,
     ...option
   })
     .then(checkStatus)

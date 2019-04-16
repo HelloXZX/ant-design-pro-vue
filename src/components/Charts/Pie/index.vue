@@ -47,6 +47,7 @@ export default {
     return {
       chart: null,
       legendData: [],
+      percentData: null,
     }
   },
   watch: {
@@ -54,12 +55,11 @@ export default {
       this.initChart();
     },
     legendData: function() {
-      console.log(this.legendData);
     }
   },
   mounted() {
     if (this.percent) {
-      this.data = [
+      this.percentData = [
         {
           x: '占比',
           y: parseFloat(this.percent),
@@ -86,7 +86,12 @@ export default {
           animate: false
         });
       }
-      var dv = new DataSet.View().source(this.data);
+      let dv;
+      if (this.percentData) {
+        dv = new DataSet.View().source(this.percentData);
+      } else {
+        dv = new DataSet.View().source(this.data);
+      }
       dv.transform({
         type: 'percent',
         field: 'y',
@@ -154,7 +159,6 @@ export default {
 
       }
       this.legendData = legendData;
-      console.log(this.legendData);
     }
   },
 }

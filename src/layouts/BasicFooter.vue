@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import GlobalFooter from '@/components/GlobalFooter.vue';
+import GlobalFooter from '@/components/GlobalFooter';
 export default {
   name: 'footer',
   components: {
@@ -22,7 +22,7 @@ export default {
         {
           key: 'github',
           title: 'github',
-          href: 'https://github.com/ant-design/ant-design-pro',
+          href: 'https://github.com/HelloXZX/ant-design-pro-vue',
         },
         {
           key: 'Ant Design',

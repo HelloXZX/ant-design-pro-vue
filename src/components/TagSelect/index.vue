@@ -42,7 +42,6 @@ export default {
         ? [...selectedTags, tag]
         : selectedTags.filter(t => t !== tag)
       this.selectedTags = nextSelectedTags
-      console.log(nextSelectedTags);
       this.$emit('change', nextSelectedTags);
     },
     handleSelectAll() {

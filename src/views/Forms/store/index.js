@@ -17,21 +17,20 @@ export default {
   },
 
   actions: {
-    async submitRegularForm({state, commit, dispatch, rootState}, payload) {
+    async submitRegularForm({ commit}, payload) {
       commit('updateLoad', true);
       await fakeSubmitForm(payload);
       commit('updateLoad', false);
       message.success('提交成功');
     },
-    async submitStepForm({state, commit, dispatch, rootState}, payload) {
-      console.log('submit...')
+    async submitStepForm({commit}, payload) {
       commit('updateLoad', true);
       await fakeSubmitForm(payload);
       commit('saveStepFormData', payload);
       commit('updateLoad', false);
       router.push('/form/step-form/result');
     },
-    async submitAdvancedForm({ payload }, { call }) {
+    async submitAdvancedForm({commit}, payload) {
       commit('updateLoad', true);
       await fakeSubmitForm(payload);
       commit('updateLoad', false);
@@ -44,7 +43,6 @@ export default {
       state.loading = payload;
     },
     saveStepFormData(state, payload) {
-      console.log(state);
       state.step = {
         ...state.step,
         ...payload,

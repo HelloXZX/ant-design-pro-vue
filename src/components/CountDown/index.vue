@@ -6,7 +6,7 @@
 export default {
   name: 'CountDown',
   props: {
-    target: Object,
+    target: Number,
   },
   data() {
     return {

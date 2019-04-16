@@ -310,12 +310,10 @@ export default {
       e.preventDefault();
       this.form.validateFieldsAndScroll(async (err, values) => {
         this.errors = err;
-        this.errorCount = Object.keys(err).length;
+        this.errorCount = !err? 0: Object.keys(err).length;
         if(!err) {
-          console.log(values);
           this.submitting = true;
           const result = await fakeSubmitForm(values);
-          console.log(result.message);
           if (result.message === 'Ok') {
             this.submitting = false;
             this.$message.success('提交成功');

@@ -228,7 +228,6 @@ export default {
         if (err) return
         const formVals = {...oldValue, ...fieldValue};
         this.formVals = formVals;
-        console.log(this.formVals)
         if (this.currentStep < 2) {
           this.currentStep = this.currentStep + 1;
         } else {

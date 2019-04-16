@@ -300,8 +300,6 @@ export default {
           }],
           onFilter: (value, record) => {
             return record.status === value;
-            console.log(value);
-            console.log(record);
           },
           customRender: (val) => {
             return <Badge status={statusMap[val]} text={status[val]} />
@@ -378,7 +376,6 @@ export default {
 
       this.form.validateFields((err, fieldsValue) => {
         if (err) return;
-        console.log(fieldsValue);
         const values = {
           ...fieldsValue,
           updatedAt: fieldsValue.updatedAt && fieldsValue.updatedAt.valueOf(),
@@ -401,7 +398,6 @@ export default {
       this.updateValues = record;
     },
     handleUpdate(fields) {
-      console.log(fields);
       this.$store.dispatch('rule/update', {
         query: this.formValues,
         body: {

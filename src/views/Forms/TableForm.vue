@@ -119,9 +119,6 @@ export default {
       index: 0,
     }
   },
-  mounted() {
-    console.log(this.data);
-  },
   methods: {
     getRowByKey(key, newData) {
       return (newData || this.data).filter(item => item.key === key)[0];
@@ -134,7 +131,6 @@ export default {
         // 进入编辑状态时保存原始数据
         if (!target.editable) {
           this.cacheOriginData[key] = { ...target };
-          console.log(this.cacheOriginData);
         }
         target.editable = !target.editable;
         this.data = newData;

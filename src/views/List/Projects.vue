@@ -64,7 +64,7 @@
         :dataSource="list"
         :grid="{ gutter: 24, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }"
       >
-        <a-list-item slot="renderItem" slot-scope="item, index">
+        <a-list-item slot="renderItem" slot-scope="item">
 
           <a-card
             class="card"
@@ -101,39 +101,18 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import {createNamespacedHelpers} from 'vuex'
 import StandardFormRow from '@/components/StandardFormRow'
-import ArticleListContent from '@/components/ArticleListContent'
 import TagSelect from '@/components/TagSelect'
 import AvatarList from '@/components/AvatarList'
 import moment from 'moment'
 const {mapState} = createNamespacedHelpers('list')
-
-const IconText = Vue.component('icon-text', {
-  functional: true,
-  props: {
-    type: String,
-    text: String|Number,
-  },
-  render(h, context) {
-    const {props: {type, text}} = context;
-    return (
-      <span>
-        <a-icon type={type} style={{ marginRight: '8px' }} />
-        {text}
-      </span>
-    )
-  }
-})
 
 export default {
   name: 'Articles',
   components: {
     StandardFormRow,
     TagSelect,
-    ArticleListContent,
-    IconText,
     AvatarList
   },
   data() {

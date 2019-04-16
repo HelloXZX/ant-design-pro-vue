@@ -1,11 +1,14 @@
 <template>
-  <footer class="globalFooter">
-    <div v-for="(link,index) in links" :key="index" class="links">
-      <a :key="link.key" :title="link.key" :href="link.href">
-        {{link.title}}
+  <div class="globalFooter">
+    <div class="links">
+      <a v-for="(link,index) in links" :key="link.key" :title="link.key" :href="link.href">
+        <span v-if="link.key == 'github'">
+          <a-icon type="github" />
+        </span>
+        <span v-else>{{link.title}}</span>
       </a>
     </div>
-  </footer>
+  </div>
 </template>
 
 <script>
@@ -22,6 +25,7 @@ export default {
 
 <style lang="less">
 @import '~ant-design-vue/lib/style/themes/default.less';
+
 .globalFooter {
   margin: 48px 0 24px 0;
   padding: 0 16px;

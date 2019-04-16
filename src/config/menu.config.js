@@ -1,7 +1,7 @@
 const mune = [
   // Dashboard
   {
-    path: "/",
+    path: "/dashboard",
     name: "Dashboard",
     icon: "dashboard",
     children: [
